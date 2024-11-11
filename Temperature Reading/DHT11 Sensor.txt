@@ -1,0 +1,30 @@
+#include <dht.h>
+
+#define dht11 A0                   
+#define LED 7        	                    	
+
+dht DHT;
+
+void setup() {
+	pinMode(LED, OUTPUT);    	
+	Serial.begin(9600);             
+	delay(1000);                        	
+}
+
+void loop() {
+	DHT.read11(dht11);       	
+	Serial.print("Current humidity = ");
+	Serial.print(DHT.humidity);
+	Serial.print("%  ");
+	Serial.print("temperature = ");
+	Serial.print(DHT.temperature);
+	Serial.println("C  ");
+
+	if(DHT.temperature>30) {
+		digitalWrite(LED, HIGH);   
+	}
+	else {
+		digitalWrite(LED, LOW);        
+	}
+	delay(1000);
+}
